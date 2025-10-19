@@ -1,0 +1,73 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <title>选课管理</title>
+  <link rel="stylesheet" href="assets/style.css">
+</head>
+<body>
+<header>
+  <nav>
+    <a href="/index.html">首页</a>
+    <a href="/students.html">学生管理</a>
+    <a href="/courses.html">课程管理</a>
+    <a href="/enroll.html">选课管理</a>
+  </nav>
+</header>
+<main>
+  <div class="card">
+    <h3>为学生选课</h3>
+    <div>
+      <label>学生</label>
+      <select id="stu"></select>
+    </div>
+    <div>
+      <label>课程</label>
+      <select id="course"></select>
+    </div>
+    <button class="btn" id="btn-enroll">选课</button>
+  </div>
+
+  <div class="card">
+    <h3>学生已选课程</h3>
+    <div>
+      <label>学生</label>
+      <select id="stu2"></select>
+      <button class="btn" id="btn-load">查看</button>
+    </div>
+    <ul id="enrolled"></ul>
+  </div>
+</main>
+<script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+<script src="/ext/lwquery.js"></script>
+<script src="assets/miniquery.js"></script>
+<script>
+function loadStudents(){
+  return $.ajax({url:'/api/students', method:'GET'}).then(function(resp){
+    var list=(resp&&resp.data)||[]; var s1=document.querySelector('#stu'); var s2=document.querySelector('#stu2');
+    s1.innerHTML=''; s2.innerHTML='';
+    list.forEach(function(it){ var o=document.createElement('option'); o.value=it.id; o.textContent=it.id+'-'+it.name; s1.appendChild(o);
+      var o2=document.createElement('option'); o2.value=it.id; o2.textContent=it.id+'-'+it.name; s2.appendChild(o2); });
+  });
+}
+function loadCourses(){
+  return $.ajax({url:'/api/courses', method:'GET'}).then(function(resp){
+    var list=(resp&&resp.data)||[]; var s=document.querySelector('#course'); s.innerHTML='';
+    list.forEach(function(it){ var o=document.createElement('option'); o.value=it.name; o.textContent=it.name; s.appendChild(o); });
+  });
+}
+$.on(document.querySelector('#btn-enroll'),'click',function(){
+  var studentId = document.querySelector('#stu').value;
+  var courseName = document.querySelector('#course').value;
+  LW.rest('/api/enroll', {studentId:parseInt(studentId), courseName:courseName}, function(){ alert('选课成功'); });
+});
+$.on(document.querySelector('#btn-load'),'click',function(){
+  var studentId = document.querySelector('#stu2').value;
+  $.ajax({url:'/api/enroll?studentId='+studentId, method:'GET'})
+    .then(function(resp){ var list=(resp&&resp.data)||[]; var ul=document.querySelector('#enrolled'); ul.innerHTML='';
+      list.forEach(function(n){ var li=document.createElement('li'); li.textContent=n; ul.appendChild(li); }); });
+});
+Promise.all([loadStudents(), loadCourses()]);
+</script>
+</body>
+</html>

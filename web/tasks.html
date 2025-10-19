@@ -1,0 +1,65 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <title>扩展任务</title>
+  <link rel="stylesheet" href="assets/style.css">
+</head>
+<body>
+<header>
+  <nav>
+    <a href="/index.html">首页</a>
+    <a href="/students.html">学生管理</a>
+    <a href="/courses.html">课程管理</a>
+    <a href="/enroll.html">选课管理</a>
+    <a href="/tasks.html">扩展任务</a>
+  </nav>
+</header>
+<main>
+  <h1>扩展任务（供学生完成）</h1>
+  <p>请结合 <a href="/assets/style.css" target="_blank">前端样式</a> 与后端微框架完成以下扩展。详细说明见项目 <code>docs/扩展任务.md</code>。</p>
+
+  <div class="card">
+    <h3>前端扩展</h3>
+    <ul>
+      <li>学生列表：支持关键字搜索与分页</li>
+      <li>表单校验与统一消息提示组件（Toast/Alert）</li>
+      <li>交互优化：按钮加载态、列表空状态、错误重试</li>
+    </ul>
+  </div>
+
+  <div class="card">
+    <h3>后端扩展</h3>
+    <ul>
+      <li>学生搜索与分页接口：<code>GET /api/students/search?q=&page=&size=</code></li>
+      <li>学生更新与删除：<code>POST /api/students/update</code>，<code>POST /api/students/delete</code></li>
+      <li>选课取消：<code>POST /api/enroll/cancel</code></li>
+      <li>课程更新与删除：<code>/api/courses/update</code>，<code>/api/courses/delete</code></li>
+      <li>导出CSV：<code>GET /api/export/students</code> 返回 <code>text/csv</code></li>
+      <li>简易登录鉴权：<code>POST /api/login</code>，受保护接口校验令牌</li>
+    </ul>
+  </div>
+
+  <div class="card">
+    <h3>进阶加分项</h3>
+    <ul>
+      <li>数据持久化：保存到文件（JSON/CSV）或嵌入式数据库</li>
+      <li>文件上传：实现导入学生列表功能</li>
+      <li>统一异常与日志：请求日志与错误统一返回</li>
+    </ul>
+  </div>
+
+  <div class="card">
+    <h3>提交建议</h3>
+    <ul>
+      <li>为每个任务撰写功能说明、接口文档、关键代码与演示截图</li>
+      <li>后端返回格式统一：<code>Json.ok(data)</code> / <code>Json.error(code, reason)</code></li>
+      <li>遵循项目代码风格与目录结构</li>
+    </ul>
+  </div>
+</main>
+<script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+<script src="/ext/lwquery.js"></script>
+<script src="assets/miniquery.js"></script>
+</body>
+</html>
