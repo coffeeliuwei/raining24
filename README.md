@@ -68,7 +68,7 @@ training24/
 ## Eclipse 导入与运行
 - 导入项目：
   - `File > Import... > Existing Projects into Workspace`。
-  - 选择目录：`d:\2022java\shixun\training24`。
+  - 选择目录：`./training24`（或选择项目根目录 `training24`）。
   - 完成导入。
 - 运行方式一（推荐）：
   - 双击项目内 `Training24Server.launch` 或右键 `Open`，点击工具栏绿色 Run。
