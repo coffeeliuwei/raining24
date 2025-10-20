@@ -16,7 +16,7 @@ training24/
 │   ├── assets/                     # 样式与脚本
 │   │   ├── style.css
 │   │   ├── miniquery.js
-│   │   └── lwquery.js              # 也可通过 /ext/lwquery.js 加载外部版本
+│   │   └── lwquery.js              # 本地引用，提升可移植性
 │   ├── index.html                  # 首页
 │   ├── students.html               # 学生管理
 │   ├── courses.html                # 课程管理
@@ -60,10 +60,24 @@ training24/
 - 页面统一引入：
   ```html
   <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
-  <script src="/ext/lwquery.js"></script>
+  <script src="assets/lwquery.js"></script>
   <script src="assets/miniquery.js"></script>
   ```
 - POST 统一使用 `LW.rest(url, req, okHandler, errHandler)`；GET 保持 `$.ajax({method:'GET'})` 或 `$.get`。
+
+## Eclipse 导入与运行
+- 导入项目：
+  - `File > Import... > Existing Projects into Workspace`。
+  - 选择目录：`d:\2022java\shixun\training24`。
+  - 完成导入。
+- 运行方式一（推荐）：
+  - 双击项目内 `Training24Server.launch` 或右键 `Open`，点击工具栏绿色 Run。
+- 运行方式二：
+  - 右键 `src/com/training/Main.java` → `Run As > Java Application`。
+- 运行环境：
+  - 项目默认编译为 `Java 1.8`（可在 `Project Properties > Java Compiler` 修改）。
+  - 工作目录固定为项目根，`web` 相对路径可正确解析。
+  - 默认编码 `UTF-8`，避免中文乱码。
 
 ## 扩展任务
 详见 `docs/扩展任务.md`，包含：搜索与分页、更新与删除、选课取消、导出 CSV、登录鉴权、持久化、文件上传、统一异常与日志等。
